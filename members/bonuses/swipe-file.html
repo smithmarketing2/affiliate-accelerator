@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Swipe File — AffiliateAccelerator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 16px 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 900;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-top {
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.03em;
+            line-height: 1.1;
+        }
+        .logo-bottom {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        
+        /* Header */
+        .header {
+            padding: 50px 24px 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #a5b4fc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .header h1 .highlight {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        
+        /* Tabs */
+        .tabs {
+            max-width: 1000px;
+            margin: 0 auto 32px;
+            padding: 0 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .tab {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .tab:hover,
+        .tab.active {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.4);
+            color: #fff;
+        }
+        
+        /* Content */
+        .content {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Swipe Card */
+        .swipe-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .swipe-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+        .swipe-card .category-tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .swipe-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #e2e8f0;
+        }
+        .swipe-card .text {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .swipe-card .notes {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+        .copy-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .formula-box h4 {
+            color: #86efac;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .formula-box code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: block;
+            color: #e2e8f0;
+            font-family: 'Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        /* Stats */
+        .stats-bar {
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 24px;
+            text-align: center;
+        }
+        .stat-item h4 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-item p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .swipe-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo-mark">
+                <div class="logo-icon">AA</div>
+                <div class="logo-text">
+                    <span class="logo-top">AFFILIATEACCELERATOR</span>
+                    <span class="logo-bottom">Bonus Tool</span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <section class="header">
+        <a href="/members/index.html" class="back-link">← Back to Member Area</a>
+        <h1>📝 Conversion <span class="highlight">Swipe File</span></h1>
+        <p>100+ proven headlines, CTAs, and email subject lines that get clicks</p>
+    </section>
+
+    <section class="stats-bar">
+        <div class="stat-item">
+            <h4>40+</h4>
+            <p>Headlines</p>
+        </div>
+        <div class="stat-item">
+            <h4>30+</h4>
+            <p>Email Subjects</p>
+        </div>
+        <div class="stat-item">
+            <h4>30+</h4>
+            <p>CTAs</p>
+        </div>
+    </section>
+
+    <section class="tabs">
+        <button class="tab active" onclick="showTab('headlines')">Headlines</button>
+        <button class="tab" onclick="showTab('subjects')">Email Subjects</button>
+        <button class="tab" onclick="showTab('ctas')">CTAs</button>
+        <button class="tab" onclick="showTab('openers')">Email Openers</button>
+        <button class="tab" onclick="showTab('closers')">Email Closers</button>
+    </section>
+
+    <section class="content">
+        <!-- Headlines -->
+        <div class="tab-content active" id="headlines">
+            <div class="formula-box">
+                <h4>🎯 Headline Formula</h4>
+                <code>Number + Adjective + Keyword + Promise</code>
+            </div>
+            
+            <div class="swipe-card">
+                <span class="category-tag">List</span>
+                <h3>10 [Topic] Tips That Actually Work in 2025</h3>
+                <div class="text">10 Affiliate Marketing Tips That Actually Work in 2025</div>
+                <p class="notes">Great for blog posts and Pinterest pins. Replace bracket with your topic.</p>
+                <button class="copy-btn" onclick="copyText('10 Affiliate Marketing Tips That Actually Work in 2025')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">How-To</span>
+                <h3>How to [Result] Without [Objection]</h3>
+                <div class="text">How to Make Your First $1,000 Without a Website</div>
+                <p class="notes">Removes barriers and objections. High click-through rate.</p>
+                <button class="copy-btn" onclick="copyText('How to Make Your First $1,000 Without a Website')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Mistake</span>
+                <h3>[Number] [Topic] Mistakes You're Making Right Now</h3>
+                <div class="text">7 Email Marketing Mistakes You're Making Right Now</div>
+                <p class="notes">Creates urgency and curiosity. People fear making mistakes.</p>
+                <button class="copy-btn" onclick="copyText('7 Email Marketing Mistakes You are Making Right Now')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Beginner</span>
+                <h3>The Beginner's Guide to [Topic] (Step-by-Step)</h3>
+                <div class="text">The Beginner's Guide to Pinterest Marketing (Step-by-Step)</div>
+                <p class="notes">Attracts beginners who want comprehensive guidance.</p>
+                <button class="copy-btn" onclick="copyText('The Beginner\'s Guide to Pinterest Marketing (Step-by-Step)')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Secret</span>
+                <h3>The [Adjective] Secret to [Result]</h3>
+                <div class="text">The Underground Secret to Getting Free Traffic</div>
+                <p class="notes">"Secret" and "underground" trigger curiosity. Use sparingly.</p>
+                <button class="copy-btn" onclick="copyText('The Underground Secret to Getting Free Traffic')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Comparison</span>
+                <h3>[Product A] vs [Product B]: Which Is Better?</h3>
+                <div class="text">ClickFunnels vs Kartra: Which Is Better for Beginners?</div>
+                <p class="notes">Great for SEO. Captures people in decision-making mode.</p>
+                <button class="copy-btn" onclick="copyText('ClickFunnels vs Kartra: Which Is Better for Beginners?')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Case Study</span>
+                <h3>How I [Result] in [Timeframe] (Case Study)</h3>
+                <div class="text">How I Made $5,000 in 30 Days (Complete Case Study)</div>
+                <p class="notes">Proof-based headline. Use real numbers for credibility.</p>
+                <button class="copy-btn" onclick="copyText('How I Made $5,000 in 30 Days (Complete Case Study)')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Question</span>
+                <h3>Is [Product/Method] Worth It? (Honest Review)</h3>
+                <div class="text">Is Jasper AI Worth It? (My Honest Review After 6 Months)</div>
+                <p class="notes">Targets people researching before buying. High buyer intent.</p>
+                <button class="copy-btn" onclick="copyText('Is Jasper AI Worth It? (My Honest Review After 6 Months)')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Email Subjects -->
+        <div class="tab-content" id="subjects">
+            <div class="formula-box">
+                <h4>📧 Subject Line Formula</h4>
+                <code>Curiosity + Benefit + Urgency (optional)</code>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Curiosity</span>
+                <h3>I was wrong about [topic]</h3>
+                <div class="text">I was wrong about affiliate marketing...</div>
+                <p class="notes">Admitting being wrong creates intrigue and vulnerability.</p>
+                <button class="copy-btn" onclick="copyText('I was wrong about affiliate marketing...')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Question</span>
+                <h3>Quick question about [topic]?</h3>
+                <div class="text">Quick question about your email list?</div>
+                <p class="notes">Personal and low-pressure. Great for re-engagement.</p>
+                <button class="copy-btn" onclick="copyText('Quick question about your email list?')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Urgency</span>
+                <h3>[Hours] left: [Benefit]</h3>
+                <div class="text">24 hours left: 50% off ends tonight</div>
+                <p class="notes">Time-sensitive. Use only when there's real urgency.</p>
+                <button class="copy-btn" onclick="copyText('24 hours left: 50% off ends tonight')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Result</span>
+                <h3>Your [result] is waiting</h3>
+                <div class="text">Your first commission is waiting...</div>
+                <p class="notes">Creates anticipation and forward momentum.</p>
+                <button class="copy-btn" onclick="copyText('Your first commission is waiting...')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Personal</span>
+                <h3>Did you see this, [Name]?</h3>
+                <div class="text">Did you see this, {{firstName}}?</div>
+                <p class="notes">Personalized and conversational. High open rates.</p>
+                <button class="copy-btn" onclick="copyText('Did you see this, {{firstName}}?')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">How-To</span>
+                <h3>How to [result] (new method)</h3>
+                <div class="text">How to get 1,000 subscribers (new Pinterest method)</div>
+                <p class="notes">Promises new information. Appeals to those wanting latest tactics.</p>
+                <button class="copy-btn" onclick="copyText('How to get 1,000 subscribers (new Pinterest method)')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Warning</span>
+                <h3>Don't [action] before reading this</h3>
+                <div class="text">Don't buy that course before reading this...</div>
+                <p class="notes">Warning pattern stops scrolling. Creates urgency to open.</p>
+                <button class="copy-btn" onclick="copyText('Don\'t buy that course before reading this...')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Story</span>
+                <h3>The [adjective] truth about [topic]</h3>
+                <div class="text">The uncomfortable truth about making money online</div>
+                <p class="notes">Emotional trigger. Promises revelation or insider info.</p>
+                <button class="copy-btn" onclick="copyText('The uncomfortable truth about making money online')">Copy</button>
+            </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="tab-content" id="ctas">
+            <div class="formula-box">
+                <h4>🎯 CTA Formula</h4>
+                <code>Action Verb + Benefit + Urgency</code>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Direct</span>
+                <h3>Get [Product] Now</h3>
+                <div class="text">Get Instant Access Now<br>Get Your Copy Now<br>Start Your Free Trial</div>
+                <p class="notes">Clear and direct. Best for warm traffic ready to buy.</p>
+                <button class="copy-btn" onclick="copyText('Get Instant Access Now')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Benefit</span>
+                <h3>[Action] and [Result]</h3>
+                <div class="text">Join now and get your first 1,000 subscribers<br>Download now and start earning today</div>
+                <p class="notes">Combines action with outcome. Reinforces the benefit.</p>
+                <button class="copy-btn" onclick="copyText('Join now and get your first 1,000 subscribers')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Urgency</span>
+                <h3>[Action] Before [Deadline]</h3>
+                <div class="text">Claim your spot before midnight<br>Get 50% off - ends tonight!</div>
+                <p class="notes">Creates FOMO. Use with genuine deadlines only.</p>
+                <button class="copy-btn" onclick="copyText('Claim your spot before midnight')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Risk Reversal</span>
+                <h3>Try [Product] Risk-Free</h3>
+                <div class="text">Try it risk-free for 30 days<br>Start with confidence - 100% guarantee</div>
+                <p class="notes">Removes friction. Great for hesitant buyers.</p>
+                <button class="copy-btn" onclick="copyText('Try it risk-free for 30 days')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Curiosity</span>
+                <h3>See How It Works</h3>
+                <div class="text">See how it works →<br>Watch the demo now<br>Discover the system</div>
+                <p class="notes">Lower commitment. Good for cold traffic.</p>
+                <button class="copy-btn" onclick="copyText('See how it works →')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Personal</span>
+                <h3>Yes! I Want [Benefit]</h3>
+                <div class="text">Yes! I want the AI toolkit<br>Yes! Send me the templates</div>
+                <p class="notes">Affirmative language. Makes user say yes to themselves.</p>
+                <button class="copy-btn" onclick="copyText('Yes! I want the AI toolkit')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Email Openers -->
+        <div class="tab-content" id="openers">
+            <div class="formula-box">
+                <h4>✉️ Email Opener Formula</h4>
+                <code>Hook + Problem/Story + Transition</code>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Story</span>
+                <h3>Three months ago...</h3>
+                <div class="text">Three months ago, I was exactly where you are right now.<br><br>Stuck. Frustrated. Wondering if this whole "make money online" thing was even real.<br><br>Then something changed...</div>
+                <p class="notes">Relatable story opener. Creates connection and curiosity.</p>
+                <button class="copy-btn" onclick="copyText('Three months ago, I was exactly where you are right now.\n\nStuck. Frustrated. Wondering if this whole "make money online" thing was even real.\n\nThen something changed...')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Question</span>
+                <h3>Can I ask you something?</h3>
+                <div class="text">Can I ask you something?<br><br>Be honest with me...<br><br>Are you actually making progress with your affiliate business? Or are you just consuming more content, hoping something will magically click?</div>
+                <p class="notes">Direct and challenging. Works well for re-engagement.</p>
+                <button class="copy-btn" onclick="copyText('Can I ask you something?\n\nBe honest with me...\n\nAre you actually making progress with your affiliate business? Or are you just consuming more content, hoping something will magically click?')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Quick Win</span>
+                <h3>I just tried something...</h3>
+                <div class="text">I just tried something that completely changed how I approach [topic].<br><br>And I had to share it with you immediately.<br><br>Here's what happened...</div>
+                <p class="notes">Creates urgency and exclusivity. Promises valuable insight.</p>
+                <button class="copy-btn" onclick="copyText('I just tried something that completely changed how I approach [topic].\n\nAnd I had to share it with you immediately.\n\nHere\'s what happened...')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Email Closers -->
+        <div class="tab-content" id="closers">
+            <div class="formula-box">
+                <h4>🔚 Email Closer Formula</h4>
+                <code>Summary + CTA + P.S. Hook</code>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Standard</span>
+                <h3>Talk soon closer</h3>
+                <div class="text">That's all for today.<br><br>Click here to [action]: [LINK]<br><br>Talk soon,<br>[Your Name]<br><br>P.S. [Add urgency or bonus reminder]</div>
+                <p class="notes">Clean and simple. Works for most email types.</p>
+                <button class="copy-btn" onclick="copyText('That\'s all for today.\n\nClick here to [action]: [LINK]\n\nTalk soon,\n[Your Name]\n\nP.S. [Add urgency or bonus reminder]')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Question</span>
+                <h3>Question closer</h3>
+                <div class="text">Ready to get started?<br><br>Click here: [LINK]<br><br>And if you have any questions, just hit reply. I read every email.<br><br>To your success,<br>[Your Name]</div>
+                <p class="notes">Invites engagement. Builds relationship through accessibility.</p>
+                <button class="copy-btn" onclick="copyText('Ready to get started?\n\nClick here: [LINK]\n\nAnd if you have any questions, just hit reply. I read every email.\n\nTo your success,\n[Your Name]')">Copy</button>
+            </div>
+
+            <div class="swipe-card">
+                <span class="category-tag">Urgency</span>
+                <h3>Last chance closer</h3>
+                <div class="text">This is it - your last chance to [benefit].<br><br>Doors close at midnight tonight: [LINK]<br><br>Don't miss out,<br>[Your Name]<br><br>P.S. Once the timer hits zero, this offer is gone for good. No exceptions.</div>
+                <p class="notes">Final email in sequence. Maximum urgency.</p>
+                <button class="copy-btn" onclick="copyText('This is it - your last chance to [benefit].\n\nDoors close at midnight tonight: [LINK]\n\nDon\'t miss out,\n[Your Name]\n\nP.S. Once the timer hits zero, this offer is gone for good. No exceptions.')">Copy</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            const btn = event.target;
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+    </script>
+</body>
+</html>

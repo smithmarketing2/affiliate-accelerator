@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Script Generator — AffiliateAccelerator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 16px 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 900;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-top {
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.03em;
+            line-height: 1.1;
+        }
+        .logo-bottom {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        
+        /* Header */
+        .header {
+            padding: 50px 24px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #a5b4fc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .header h1 .highlight {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        
+        /* Generator Tool */
+        .tool-container {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+        }
+        .tool-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+        
+        /* Results */
+        .results {
+            margin-top: 40px;
+            display: none;
+        }
+        .results.show {
+            display: block;
+        }
+        .results h3 {
+            margin-bottom: 16px;
+            font-size: 1.3rem;
+        }
+        .script-output {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 28px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+        }
+        .action-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.95rem;
+        }
+        .action-btn.primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+        }
+        .action-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Swipe File */
+        .swipe-section {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+        }
+        .swipe-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .tab.active,
+        .tab:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.4);
+            color: #fff;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .script-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .script-card h4 {
+            margin-bottom: 12px;
+            color: #a5b4fc;
+        }
+        .script-card pre {
+            white-space: pre-wrap;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 6px;
+            color: #a5b4fc;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .copy-btn:hover {
+            background: rgba(99, 102, 241, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .tool-box { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo-mark">
+                <div class="logo-icon">AA</div>
+                <div class="logo-text">
+                    <span class="logo-top">AFFILIATEACCELERATOR</span>
+                    <span class="logo-bottom">Bonus Tool</span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <section class="header">
+        <a href="/members/index.html" class="back-link">← Back to Member Area</a>
+        <h1>🎬 AI Video Script <span class="highlight">Generator</span></h1>
+        <p>Create engaging video scripts for YouTube, TikTok, and Reels in minutes</p>
+    </section>
+
+    <section class="tool-container">
+        <div class="tool-box">
+            <div class="form-group">
+                <label>Video Topic/Product</label>
+                <input type="text" id="topic" placeholder="e.g., Best AI tools for content creators">
+            </div>
+            <div class="form-group">
+                <label>Platform</label>
+                <select id="platform">
+                    <option value="youtube">YouTube (8-10 min)</option>
+                    <option value="tiktok">TikTok (30-60 sec)</option>
+                    <option value="reels">Instagram Reels (30-60 sec)</option>
+                    <option value="shorts">YouTube Shorts (30-60 sec)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Target Audience</label>
+                <input type="text" id="audience" placeholder="e.g., Beginner affiliate marketers">
+            </div>
+            <div class="form-group">
+                <label>Key Points to Cover (optional)</label>
+                <textarea id="points" placeholder="Enter main points you want to cover..."></textarea>
+            </div>
+            <button class="generate-btn" onclick="generateScript()">🚀 Generate Script</button>
+            
+            <div class="results" id="results">
+                <h3>Your Generated Script</h3>
+                <div class="script-output" id="scriptOutput"></div>
+                <div class="action-btns">
+                    <button class="action-btn primary" onclick="copyScript()">📋 Copy to Clipboard</button>
+                    <button class="action-btn secondary" onclick="saveScript()">💾 Save to Library</button>
+                    <button class="action-btn secondary" onclick="regenerate()">🔄 Regenerate</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="swipe-section">
+        <h2>Script Templates</h2>
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('review')">Product Review</div>
+            <div class="tab" onclick="showTab('tutorial')">Tutorial</div>
+            <div class="tab" onclick="showTab('story')">Story</div>
+            <div class="tab" onclick="showTab('list')">Listicle</div>
+        </div>
+        
+        <div class="tab-content active" id="review">
+            <div class="script-card">
+                <h4>The Honest Review Framework</h4>
+                <pre>[HOOK - 0:00-0:15]
+"I spent $X on [PRODUCT] so you don't have to. Here's what happened..."
+
+[PROBLEM - 0:15-0:45]
+"Before I found this, I was struggling with [PAIN POINT]. I tried [ALTERNATIVE] but it [FAILED]."
+
+[SOLUTION INTRO - 0:45-1:30]
+"Then I discovered [PRODUCT]. At first I was skeptical because [OBJECTION]. But after [TIME FRAME], I noticed [RESULT]."
+
+[FEATURES - 1:30-3:00]
+"Here's what makes it different:
+• [Feature 1]: [Benefit]
+• [Feature 2]: [Benefit]
+• [Feature 3]: [Benefit]"
+
+[PROOF - 3:00-4:00]
+"Look at these results: [SHOW PROOF]. And I'm not the only one. Here are what other users are saying..."
+
+[CTA - 4:00-5:00]
+"If you're ready to [DESIRED OUTCOME], check the link in the description. And if you use my link, you'll get [BONUS]."
+
+[OUTRO - 5:00-5:30]
+"Questions? Drop them in the comments. And subscribe for more honest reviews like this."</pre>
+                <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="tutorial">
+            <div class="script-card">
+                <h4>The Tutorial Framework</h4>
+                <pre>[HOOK - 0:00-0:15]
+"Stop doing [OLD METHOD]! Here's a faster way to [RESULT]..."
+
+[RESULT PREVIEW - 0:15-0:30]
+"In the next [TIME], you'll learn how to [RESULT]. Here's what we're building..."
+
+[STEP 1 - 0:30-2:00]
+"First, [ACTION]. Go to [LOCATION] and click [BUTTON]. This sets up [FOUNDATION]."
+
+[STEP 2 - 2:00-4:00]
+"Next, [ACTION]. The key here is [TIP]. Most people get this wrong by [MISTAKE]."
+
+[STEP 3 - 4:00-6:00]
+"Now for the secret sauce: [TECHNIQUE]. This is what separates beginners from pros."
+
+[RESULT - 6:00-7:00]
+"And just like that, you have [RESULT]. Here's what mine looks like: [SHOW RESULT]."
+
+[CTA - 7:00-8:00]
+"Want the template I used? Link in description. Now go try this and tag me in your results!"</pre>
+                <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="story">
+            <div class="script-card">
+                <h4>The Story Framework</h4>
+                <pre>[HOOK - 0:00-0:20]
+"Three months ago, I was [STRUGGLE]. Today, I [RESULT]. Here's what changed everything..."
+
+[BACKSTORY - 0:20-1:30]
+"I was [DESCRIBE LOW POINT]. Every day I would [FRUSTRATING ACTION]. I felt [EMOTION]."
+
+[TURNING POINT - 1:30-2:30]
+"Then [EVENT] happened. I realized [INSIGHT]. I decided to [DECISION]."
+
+[PROCESS - 2:30-4:30]
+"The first [TIME PERIOD] was [CHALLENGE]. But then I discovered [SOLUTION]. I started [ACTION]."
+
+[BREAKTHROUGH - 4:30-5:30]
+"Within [TIME], I [RESULT]. My [METRIC] went from [BEFORE] to [AFTER]."
+
+[LESSON - 5:30-6:30]
+"The lesson? [KEY LESSON]. If you're where I was, here's what I'd tell you..."
+
+[CTA - 6:30-7:30]
+"I documented the entire process. Link in bio if you want the playbook."</pre>
+                <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="list">
+            <div class="script-card">
+                <h4>The Listicle Framework</h4>
+                <pre>[HOOK - 0:00-0:15]
+"[NUMBER] [TOPIC] that [BENEFIT]. Number [TEASER NUMBER] changed everything for me."
+
+[NUMBER 5 - 0:15-1:30]
+"Starting with number 5: [ITEM]. This is great because [BENEFIT]. But the downside is [DRAWBACK]."
+
+[NUMBER 4 - 1:30-2:45]
+"Number 4: [ITEM]. What I love about this is [UNIQUE FEATURE]. Perfect for [USE CASE]."
+
+[NUMBER 3 - 2:45-4:00]
+"Number 3 is [ITEM]. This one [KEY DIFFERENTIATOR]. I use it for [SPECIFIC USE]."
+
+[NUMBER 2 - 4:00-5:15]
+"Number 2: [ITEM]. This is the one most people overlook, but [WHY IT MATTERS]."
+
+[NUMBER 1 - 5:15-6:30]
+"And number 1: [ITEM]. Here's why it's #1: [COMPELLING REASON]. Since using it, [RESULT]."
+
+[CTA - 6:30-7:30]
+"Which one will you try first? Comment below. And save this for later!"</pre>
+                <button class="copy-btn" onclick="copyTemplate(this)">Copy</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Tab switching
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        // Generate script
+        function generateScript() {
+            const topic = document.getElementById('topic').value;
+            const platform = document.getElementById('platform').value;
+            const audience = document.getElementById('audience').value;
+            const points = document.getElementById('points').value;
+            
+            if (!topic) {
+                alert('Please enter a video topic');
+                return;
+            }
+            
+            // Generate script based on inputs
+            let script = `VIDEO SCRIPT: ${topic.toUpperCase()}\n`;
+            script += `Platform: ${platform.toUpperCase()}\n`;
+            script += `Target: ${audience || 'General audience'}\n`;
+            script += `\n═══════════════════════════════════════\n\n`;
+            
+            if (platform === 'youtube') {
+                script += `[HOOK - 0:00-0:30]\n`;
+                script += `"If you're struggling with ${topic}, this video will change everything. I'm about to show you exactly how to [RESULT] in the next 10 minutes."\n\n`;
+                script += `[INTRO - 0:30-1:00]\n`;
+                script += `"Welcome back! In today's video, we're diving deep into ${topic}. Whether you're a complete beginner or you've been at this for a while, I've got something for you."\n\n`;
+                script += `[MAIN CONTENT - 1:00-8:00]\n`;
+                if (points) {
+                    const pointList = points.split('\n').filter(p => p.trim());
+                    pointList.forEach((point, i) => {
+                        script += `Point ${i + 1}: ${point}\n`;
+                        script += `[Explain ${point} with examples and proof]\n\n`;
+                    });
+                } else {
+                    script += `[Break down ${topic} into 3-5 key points]\n`;
+                    script += `[Provide examples, proof, and actionable steps]\n\n`;
+                }
+                script += `[CTA - 8:00-9:00]\n`;
+                script += `"If you found this helpful, smash that like button and subscribe for more content like this. Drop a comment below with your biggest takeaway!"\n\n`;
+                script += `[OUTRO - 9:00-10:00]\n`;
+                script += `"Thanks for watching, and I'll see you in the next one!"`;
+            } else {
+                script += `[HOOK - 0:00-0:03]\n`;
+                script += `"POV: You finally figured out ${topic}"\n\n`;
+                script += `[PROBLEM - 0:03-0:10]\n`;
+                script += `"Everyone's struggling with [PAIN POINT]..."\n\n`;
+                script += `[SOLUTION - 0:10-0:25]\n`;
+                script += `"But here's the secret they don't tell you: [SOLUTION]"\n\n`;
+                script += `[PROOF/RESULT - 0:25-0:40]\n`;
+                script += `"Since I started doing this: [SHOW RESULT]"\n\n`;
+                script += `[HOW-TO - 0:40-0:50]\n`;
+                script += `"Here's exactly what to do: [3 STEPS]"\n\n`;
+                script += `[CTA - 0:50-0:60]\n`;
+                script += `"Follow for more ${topic} tips! Save this for later!"`;
+            }
+            
+            document.getElementById('scriptOutput').textContent = script;
+            document.getElementById('results').classList.add('show');
+        }
+        
+        // Copy script
+        function copyScript() {
+            const script = document.getElementById('scriptOutput').textContent;
+            navigator.clipboard.writeText(script);
+            alert('Script copied to clipboard!');
+        }
+        
+        // Copy template
+        function copyTemplate(btn) {
+            const template = btn.parentElement.querySelector('pre').textContent;
+            navigator.clipboard.writeText(template);
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+        
+        // Save script
+        function saveScript() {
+            const script = document.getElementById('scriptOutput').textContent;
+            const saved = JSON.parse(localStorage.getItem('aa_scripts') || '[]');
+            saved.push({
+                topic: document.getElementById('topic').value,
+                script: script,
+                date: new Date().toLocaleDateString()
+            });
+            localStorage.setItem('aa_scripts', JSON.stringify(saved));
+            alert('Script saved to your library!');
+        }
+        
+        // Regenerate
+        function regenerate() {
+            generateScript();
+        }
+    </script>
+</body>
+</html>
