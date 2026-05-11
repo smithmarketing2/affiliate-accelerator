@@ -1,1 +1,674 @@
-<!DOCTYPE html><html><head><title>AffiliateAccelerator</title></head><body><h1>AffiliateAccelerator - Coming Soon</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AffiliateAccelerator — AI-Powered Commission System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 16px 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 900;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-top {
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.03em;
+            line-height: 1.1;
+        }
+        .logo-bottom {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .nav-cta {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 24px 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .eyebrow {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subheadline {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+        
+        /* Video Container */
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            background: #000;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-placeholder {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            padding: 20px 48px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.5);
+        }
+        .cta-subtext {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-top: 16px;
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 48px;
+        }
+        
+        /* Problem Section */
+        .problem-box {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.05));
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+        }
+        .problem-box h3 {
+            color: #fca5a5;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+        }
+        .problem-list {
+            list-style: none;
+        }
+        .problem-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: #cbd5e1;
+        }
+        .problem-list li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: 700;
+        }
+        
+        /* Solution Section */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .solution-card {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+        .solution-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        .solution-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .solution-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+        
+        /* What's Inside */
+        .module-list {
+            display: grid;
+            gap: 16px;
+            margin-top: 40px;
+        }
+        .module-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s;
+        }
+        .module-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+        .module-number {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .module-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        .module-content p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Bonuses */
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .bonus-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+        .bonus-card::before {
+            content: "BONUS";
+            position: absolute;
+            top: 12px;
+            right: -30px;
+            background: #8b5cf6;
+            color: #fff;
+            padding: 4px 40px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            transform: rotate(45deg);
+        }
+        .bonus-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            padding-right: 40px;
+        }
+        .bonus-card .value {
+            color: #a5b4fc;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .bonus-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Guarantee */
+        .guarantee-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 48px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        .guarantee-box .seal {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .guarantee-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #86efac;
+        }
+        .guarantee-box p {
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Price Section */
+        .price-section {
+            text-align: center;
+            padding: 60px 24px;
+        }
+        .price-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.15));
+            border: 2px solid rgba(99, 102, 241, 0.4);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .price-original {
+            text-decoration: line-through;
+            color: #64748b;
+            font-size: 1.3rem;
+        }
+        .price-current {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 8px 0;
+        }
+        .price-note {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 24px 32px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            padding: 0 32px 24px;
+            color: #94a3b8;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { padding: 60px 20px 40px; }
+            .solution-grid { grid-template-columns: 1fr; }
+            .module-item { flex-direction: column; text-align: center; }
+            .guarantee-box { padding: 32px 24px; }
+            .price-box { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo-mark">
+                <div class="logo-icon">AA</div>
+                <div class="logo-text">
+                    <span class="logo-top">AFFILIATEACCELERATOR</span>
+                    <span class="logo-bottom">AI-Powered Commission System</span>
+                </div>
+            </a>
+            <a href="#pricing" class="nav-cta">Get Instant Access</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="eyebrow">🚀 The AI System That Turns Beginners Into Commission Earners</span>
+        <h1>Go From <span class="highlight">Zero Sales</span> To Your First Affiliate Commission In <span class="highlight">14 Days</span> — Even If You've Never Made A Sale Before</h1>
+        <p class="subheadline">The complete AI-powered toolkit that eliminates the hard parts of affiliate marketing. No content creation skills needed. No tech overwhelm. Just copy, paste, and profit.</p>
+        
+        <div class="video-container">
+            <div class="video-placeholder">🎬 VSL Video Loading...</div>
+        </div>
+        
+        <a href="#pricing" class="cta-button">Get AffiliateAccelerator Now — $67</a>
+        <p class="cta-subtext">✓ Instant access ✓ 30-day guarantee ✓ One-time payment</p>
+    </section>
+
+    <!-- Problem Section -->
+    <section>
+        <h2 class="section-title">Why Most Affiliate Marketers <span style="color: #ef4444;">Never Make A Sale</span></h2>
+        <p class="section-subtitle">You've seen the screenshots. You've bought the courses. But your results? Crickets.</p>
+        
+        <div class="problem-box">
+            <h3>🛑 The Brutal Truth About Affiliate Marketing</h3>
+            <ul class="problem-list">
+                <li>You spend hours writing content that nobody reads</li>
+                <li>You try to "build an audience" but your follower count stays stuck</li>
+                <li>You buy tools you don't know how to use</li>
+                <li>You watch YouTube videos but nothing seems to work for YOU</li>
+                <li>You're overwhelmed by all the moving pieces</li>
+                <li>You're starting to think affiliate marketing is a scam</li>
+            </ul>
+        </div>
+        
+        <p style="text-align: center; font-size: 1.2rem; color: #cbd5e1;">Here's what nobody tells you: <strong style="color: #fff;">The problem isn't you. It's that you're doing everything the hard way.</strong></p>
+    </section>
+
+    <!-- Solution Section -->
+    <section>
+        <h2 class="section-title">What If You Had <span class="highlight">AI Do The Hard Work</span> For You?</h2>
+        <p class="section-subtitle">Imagine having a system that writes your content, builds your emails, and creates your landing pages — all in minutes, not days.</p>
+        
+        <div class="solution-grid">
+            <div class="solution-card">
+                <div class="icon">⚡</div>
+                <h4>AI Content Engine</h4>
+                <p>Generate high-converting blog posts, social media content, and emails in minutes using our proven prompt library.</p>
+            </div>
+            <div class="solution-card">
+                <div class="icon">🎯</div>
+                <h4>Done-For-You Templates</h4>
+                <p>Never start from scratch again. Landing pages, email sequences, and social posts — all ready to customize.</p>
+            </div>
+            <div class="solution-card">
+                <div class="icon">🚀</div>
+                <h4>Traffic Blueprint</h4>
+                <p>Step-by-step system to drive targeted traffic using free methods that work in 2025 (no ad spend required).</p>
+            </div>
+            <div class="solution-card">
+                <div class="icon">💰</div>
+                <h4>Commission Tracking</h4>
+                <p>Know exactly what's working with our simple tracking system. Double down on winners, cut the losers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Inside -->
+    <section>
+        <h2 class="section-title">Here's Everything You Get <span class="highlight">Inside</span> AffiliateAccelerator</h2>
+        <p class="section-subtitle">A complete system designed to take you from complete beginner to commission earner</p>
+        
+        <div class="module-list">
+            <div class="module-item">
+                <div class="module-number">1</div>
+                <div class="module-content">
+                    <h4>The AI Affiliate Foundation</h4>
+                    <p>The exact setup process to get your affiliate business running in under 2 hours</p>
+                </div>
+            </div>
+            <div class="module-item">
+                <div class="module-number">2</div>
+                <div class="module-content">
+                    <h4>The Prompt Profit Library</h4>
+                    <p>127 battle-tested AI prompts for content, emails, ads, and landing pages that convert</p>
+                </div>
+            </div>
+            <div class="module-item">
+                <div class="module-number">3</div>
+                <div class="module-content">
+                    <h4>The Traffic Multiplier Method</h4>
+                    <p>How to get your first 1,000 targeted visitors without spending a dime on ads</p>
+                </div>
+            </div>
+            <div class="module-item">
+                <div class="module-number">4</div>
+                <div class="module-content">
+                    <h4>The Email Cash Machine</h4>
+                    <p>7-day email sequence templates that turn subscribers into buyers on autopilot</p>
+                </div>
+            </div>
+            <div class="module-item">
+                <div class="module-number">5</div>
+                <div class="module-content">
+                    <h4>The Landing Page Vault</h4>
+                    <p>10 high-converting landing page templates you can deploy in minutes</p>
+                </div>
+            </div>
+            <div class="module-item">
+                <div class="module-number">6</div>
+                <div class="module-content">
+                    <h4>The Commission Tracker System</h4>
+                    <p>Simple tracking tools to monitor your progress and optimize for maximum profit</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonuses -->
+    <section>
+        <h2 class="section-title">Plus, Get These <span class="highlight">Fast-Action Bonuses</span></h2>
+        <p class="section-subtitle">These bonuses alone are worth 10x your investment today</p>
+        
+        <div class="bonus-grid">
+            <div class="bonus-card">
+                <h4>The AI Video Script Generator</h4>
+                <div class="value">Value: $97</div>
+                <p>Create engaging video scripts for YouTube, TikTok, and Reels in minutes</p>
+            </div>
+            <div class="bonus-card">
+                <h4>The Pinterest Traffic Playbook</h4>
+                <div class="value">Value: $67</div>
+                <p>Step-by-step system to drive thousands of free visitors from Pinterest</p>
+            </div>
+            <div class="bonus-card">
+                <h4>The Affiliate Offer Rolodex</h4>
+                <div class="value">Value: $147</div>
+                <p>Curated list of 50+ high-converting affiliate programs in profitable niches</p>
+            </div>
+            <div class="bonus-card">
+                <h4>The Conversion Swipe File</h4>
+                <div class="value">Value: $197</div>
+                <p>100+ proven headlines, CTAs, and email subject lines that get clicks</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee -->
+    <section>
+        <div class="guarantee-box">
+            <div class="seal">🛡️</div>
+            <h3>Our 30-Day "First Commission" Guarantee</h3>
+            <p>Try AffiliateAccelerator risk-free for 30 days. Use the system, implement the strategies, and if you don't make your first affiliate commission within 30 days, just email us for a full refund. No questions asked. No hoops to jump through. We'll even let you keep the bonuses as our gift to you.</p>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="price-section" id="pricing">
+        <h2 class="section-title">Get <span class="highlight">Instant Access</span> Today</h2>
+        <p class="section-subtitle">Everything you need to start earning affiliate commissions in the next 14 days</p>
+        
+        <div class="price-box">
+            <div class="price-original">Regular Price: $297</div>
+            <div class="price-current">$67</div>
+            <p class="price-note">One-time payment. No monthly fees. Lifetime access.</p>
+            <a href="#" class="cta-button" style="width: 100%;">Get AffiliateAccelerator Now</a>
+            <p style="margin-top: 20px; color: #64748b; font-size: 0.85rem;">🔒 Secure checkout powered by Stripe</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <h2 class="section-title">Frequently Asked <span class="highlight">Questions</span></h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do I need any prior experience with affiliate marketing?</span>
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                Not at all. AffiliateAccelerator is specifically designed for beginners. We walk you through every step from setting up your first affiliate account to making your first commission.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do I need to pay for AI tools?</span>
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                We recommend ChatGPT Plus ($20/month) for best results, but you can use the free version to get started. Many of our prompts work with free AI tools like Claude and Bing Chat.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How long until I see results?</span>
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                Most students who implement the system see their first commission within 14-30 days. Your results depend on how quickly you take action and how consistently you apply the strategies.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Is there a money-back guarantee?</span>
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                Absolutely. You have 30 days to try AffiliateAccelerator risk-free. If you're not satisfied for any reason, email us for a full refund.
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section style="text-align: center;">
+        <h2 class="section-title">Ready To Get Your <span class="highlight">First Commission?</span></h2>
+        <p class="section-subtitle">Join hundreds of beginners who are using AI to shortcut their path to affiliate success</p>
+        <a href="#pricing" class="cta-button">Get Started Now — $67</a>
+        <p class="cta-subtext">⚡ Instant access delivered to your email</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 AffiliateAccelerator. All rights reserved.</p>
+        <p style="margin-top: 8px;">This site is not a part of the Facebook website or Facebook Inc. This site is NOT endorsed by Facebook in any way.</p>
+    </footer>
+</body>
+</html>
