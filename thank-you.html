@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You — AffiliateAccelerator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 16px 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 900;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-top {
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.03em;
+            line-height: 1.1;
+        }
+        .logo-bottom {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 24px 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #86efac;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        .badge::before {
+            content: "✓";
+            background: #22c55e;
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        
+        /* Video */
+        .video-container {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            background: #000;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-placeholder {
+            color: #64748b;
+        }
+        
+        /* Next Steps */
+        .next-steps {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+        }
+        .next-steps h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+        }
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+        .step-pill {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            padding: 16px 28px;
+            font-weight: 600;
+        }
+        .step-pill .num {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            margin-right: 12px;
+        }
+        
+        /* Modules */
+        .modules {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+        }
+        .modules h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+        }
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .module-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 28px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        .module-card:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-3px);
+        }
+        .module-card .num {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .module-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .module-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Bonuses */
+        .bonuses {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+        }
+        .bonuses h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+        }
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .bonus-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+        .bonus-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        .bonus-card h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .bonus-card a {
+            color: #a5b4fc;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .bonus-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Guarantee */
+        .guarantee {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+            text-align: center;
+        }
+        .guarantee-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        .guarantee-box .seal {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        .guarantee-box h3 {
+            color: #86efac;
+            margin-bottom: 12px;
+        }
+        .guarantee-box p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+        
+        /* Support */
+        .support {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .support h3 {
+            margin-bottom: 12px;
+        }
+        .support p {
+            color: #94a3b8;
+        }
+        .support a {
+            color: #a5b4fc;
+            text-decoration: none;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 24px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo-mark">
+                <div class="logo-icon">AA</div>
+                <div class="logo-text">
+                    <span class="logo-top">AFFILIATEACCELERATOR</span>
+                    <span class="logo-bottom">AI-Powered Commission System</span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="badge">Purchase Confirmed</div>
+        <h1>Welcome To <span class="highlight">AffiliateAccelerator</span></h1>
+        <p>Your order is complete! Check your email for login details. In the meantime, watch this quick welcome video:</p>
+        
+        <div class="video-container">
+            <div class="video-placeholder">🎬 Welcome Video</div>
+        </div>
+    </section>
+
+    <section class="next-steps">
+        <h2>What To Do Next</h2>
+        <div class="steps">
+            <div class="step-pill"><span class="num">1</span> Check your email</div>
+            <div class="step-pill"><span class="num">2</span> Access member area</div>
+            <div class="step-pill"><span class="num">3</span> Start Module 1</div>
+        </div>
+    </section>
+
+    <section class="modules">
+        <h2>Your Training Modules</h2>
+        <div class="module-grid">
+            <a href="/members/modules/module-1.html" class="module-card">
+                <div class="num">1</div>
+                <h3>The AI Affiliate Foundation</h3>
+                <p>Get your affiliate business set up in under 2 hours</p>
+            </a>
+            <a href="/members/modules/module-2.html" class="module-card">
+                <div class="num">2</div>
+                <h3>The Prompt Profit Library</h3>
+                <p>127 AI prompts for content, emails, and landing pages</p>
+            </a>
+            <a href="/members/modules/module-3.html" class="module-card">
+                <div class="num">3</div>
+                <h3>The Traffic Multiplier Method</h3>
+                <p>Get your first 1,000 visitors without paid ads</p>
+            </a>
+            <a href="/members/modules/module-4.html" class="module-card">
+                <div class="num">4</div>
+                <h3>The Email Cash Machine</h3>
+                <p>7-day email sequences that convert on autopilot</p>
+            </a>
+            <a href="/members/modules/module-5.html" class="module-card">
+                <div class="num">5</div>
+                <h3>The Landing Page Vault</h3>
+                <p>10 high-converting templates ready to deploy</p>
+            </a>
+            <a href="/members/modules/module-6.html" class="module-card">
+                <div class="num">6</div>
+                <h3>The Commission Tracker System</h3>
+                <p>Track progress and optimize for maximum profit</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="bonuses">
+        <h2>Your Fast-Action Bonuses</h2>
+        <div class="bonus-grid">
+            <div class="bonus-card">
+                <div class="icon">🎬</div>
+                <h4>AI Video Script Generator</h4>
+                <a href="/members/bonuses/video-scripts.html">Access Bonus →</a>
+            </div>
+            <div class="bonus-card">
+                <div class="icon">📌</div>
+                <h4>Pinterest Traffic Playbook</h4>
+                <a href="/members/bonuses/pinterest.html">Access Bonus →</a>
+            </div>
+            <div class="bonus-card">
+                <div class="icon">📇</div>
+                <h4>Affiliate Offer Rolodex</h4>
+                <a href="/members/bonuses/rolodex.html">Access Bonus →</a>
+            </div>
+            <div class="bonus-card">
+                <div class="icon">📝</div>
+                <h4>Conversion Swipe File</h4>
+                <a href="/members/bonuses/swipe-file.html">Access Bonus →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="guarantee">
+        <div class="guarantee-box">
+            <div class="seal">🛡️</div>
+            <h3>30-Day First Commission Guarantee</h3>
+            <p>If you don't make your first affiliate commission within 30 days of implementing this system, email us for a full refund. No questions asked.</p>
+        </div>
+    </section>
+
+    <section class="support">
+        <h3>Need Help?</h3>
+        <p>Email us at <a href="mailto:support@affiliateaccelerator.com">support@affiliateaccelerator.com</a><br>We typically respond within 24 hours.</p>
+    </section>
+
+    <footer>
+        <p>© 2025 AffiliateAccelerator. All rights reserved.</p>
+    </footer>
+</body>
+</html>

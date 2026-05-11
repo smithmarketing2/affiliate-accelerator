@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1 — The AI Affiliate Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 16px 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 900;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-top {
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.03em;
+            line-height: 1.1;
+        }
+        .logo-bottom {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #fff;
+        }
+        
+        /* Module Header */
+        .module-header {
+            padding: 40px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #a5b4fc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .back-link:hover {
+            color: #fff;
+        }
+        .module-num {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .module-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .module-header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        
+        /* Video */
+        .video-section {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 0 24px;
+        }
+        .video-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            background: #000;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-placeholder {
+            color: #64748b;
+        }
+        
+        /* Content */
+        .content {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+        }
+        .content h2 {
+            font-size: 1.5rem;
+            margin: 40px 0 20px;
+        }
+        .content h3 {
+            font-size: 1.2rem;
+            margin: 30px 0 15px;
+            color: #a5b4fc;
+        }
+        .content p {
+            color: #cbd5e1;
+            margin-bottom: 16px;
+        }
+        .content ul {
+            margin: 20px 0;
+            padding-left: 24px;
+        }
+        .content li {
+            color: #cbd5e1;
+            margin-bottom: 12px;
+        }
+        
+        /* Key Takeaways */
+        .takeaways {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+        }
+        .takeaways h3 {
+            margin-top: 0;
+        }
+        .takeaways ul {
+            margin: 0;
+        }
+        
+        /* Navigation Buttons */
+        .module-nav {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .nav-btn {
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .nav-btn.prev {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        .nav-btn.next {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+        .mark-complete {
+            background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .module-nav { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo-mark">
+                <div class="logo-icon">AA</div>
+                <div class="logo-text">
+                    <span class="logo-top">AFFILIATEACCELERATOR</span>
+                    <span class="logo-bottom">Member Area</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="/members/index.html">Home</a>
+                <a href="/members/index.html#modules">Modules</a>
+                <a href="/members/index.html#bonuses">Bonuses</a>
+                <a href="/members/index.html#support">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="module-header">
+        <a href="/members/index.html" class="back-link">← Back to Dashboard</a>
+        <span class="module-num">MODULE 1</span>
+        <h1>The AI Affiliate Foundation</h1>
+        <p>Get your affiliate business set up in under 2 hours</p>
+    </section>
+
+    <section class="video-section">
+        <div class="video-container">
+            <div class="video-placeholder">🎬 Module 1 Video</div>
+        </div>
+    </section>
+
+    <section class="content">
+        <h2>What You'll Learn</h2>
+        <p>In this foundational module, you'll set up the core systems that power your affiliate marketing business. By the end, you'll have a fully operational affiliate setup ready to generate commissions.</p>
+        
+        <h3>Module Overview</h3>
+        <ul>
+            <li>Understanding the affiliate marketing ecosystem</li>
+            <li>Choosing your first profitable niche</li>
+            <li>Setting up your affiliate accounts with top networks</li>
+            <li>Creating your content hub (website/social presence)</li>
+            <li>Establishing your email capture system</li>
+            <li>Connecting your AI tools for maximum efficiency</li>
+        </ul>
+        
+        <div class="takeaways">
+            <h3>Key Takeaways</h3>
+            <ul>
+                <li>The 3 criteria for selecting a profitable niche</li>
+                <li>How to get approved by affiliate networks (even as a beginner)</li>
+                <li>The essential tech stack that costs under $50/month</li>
+                <li>Your AI content workflow setup</li>
+                <li>The lead capture system that converts at 40%+</li>
+            </ul>
+        </div>
+        
+        <h3>Action Steps</h3>
+        <ol>
+            <li>Complete your niche selection worksheet</li>
+            <li>Apply to 3 affiliate networks</li>
+            <li>Set up your content platform</li>
+            <li>Configure your email capture system</li>
+            <li>Connect your AI tools using the provided prompts</li>
+        </ol>
+        
+        <h3>Resources</h3>
+        <ul>
+            <li>📄 Niche Selection Worksheet (PDF)</li>
+            <li>📄 Affiliate Network Application Templates</li>
+            <li>📄 Tech Stack Setup Checklist</li>
+            <li>🤖 AI Setup Prompts</li>
+        </ul>
+    </section>
+
+    <section class="module-nav">
+        <a href="/members/index.html" class="nav-btn prev">← Dashboard</a>
+        <button class="nav-btn next mark-complete" onclick="markComplete()">Mark Complete →</button>
+    </section>
+
+    <script>
+        function markComplete() {
+            const completed = JSON.parse(localStorage.getItem('aa_completed') || '[]');
+            if (!completed.includes(1)) {
+                completed.push(1);
+                localStorage.setItem('aa_completed', JSON.stringify(completed));
+            }
+            window.location.href = 'module-2.html';
+        }
+    </script>
+</body>
+</html>
